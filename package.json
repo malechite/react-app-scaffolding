@@ -12,9 +12,11 @@
   "author": "Brandon Dusseau",
   "license": "",
   "dependencies": {
+    "antd": "^2.6.1",
+    "babel-plugin-import": "^1.1.0",
     "express": "^4.14.0",
     "superagent": "^2.3.0",
-    "webpack": "^1.13.3"
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
@@ -30,9 +32,10 @@
     "isomorphic-fetch": "^2.2.1",
     "node-sass": "^3.12.2",
     "nodemon": "^1.11.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-redux": "^4.4.6",
+    "react-router": "^3.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "sass-loader": "^4.0.2",

@@ -1,5 +1,5 @@
 //import request from 'superagent';
-import * as types from '../constants/ActionTypes';
+import * as types from './ActionTypes';
 
 //////////////////////////
 ////// User Actions //////
