@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import '~antd/dist/antd';
 
 html {
     -webkit-font-smoothing: antialiased;
@@ -8,11 +8,6 @@ html {
 body {
     background-color: #eeeeee;
     overflow-y:scroll;
-}
-
-#header {
-    padding-top: 30px;
-    width: 100%;
 }
 
 h1 {

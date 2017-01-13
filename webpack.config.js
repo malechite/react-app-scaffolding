@@ -22,7 +22,8 @@ module.exports = {
                 },
                 cacheDirectory: true
             },
-            { test: /\.scss$/, loader: 'style!css!sass' },
+            ///TODO: Extract SASS to a single file in production instead of using style loaders
+            { test: /\.scss$/, loader: 'style!css?modules&localIdentName=[path][name]---[local]---[hash:base64:5]!sass' },
             { test: /\.css$/, loader: 'style!css' },
             { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
             { test: /\.(woff|woff2)$/, loader:'url?prefix=font/&limit=5000' },
