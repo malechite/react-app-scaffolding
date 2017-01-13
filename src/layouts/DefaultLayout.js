@@ -1,19 +1,20 @@
 import React, { Component, PropTypes } from 'react';
+import { Layout} from 'antd';
 
-
+const { Content } = Layout;
 import Header from './components/Header';
 import Footer from './components/Footer';
 
 export default class DefaultLayout extends Component {
     render() {
         return (
-            <div id='main-container'>
+            <Layout className='layout'>
                 <Header />
-                <div id='main-container'>
+                <Content>
                     {this.props.children}
-                </div>
+                </Content>
                 <Footer />
-            </div>
+            </Layout>
         );
     }
 }
