@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
+import { ProgressBar } from '@blueprintjs/core';
 
 export default class Users extends Component {
     render() {
         return (
             <div>
-                Users
-                <Button type='primary'>Users</Button>
+                <ProgressBar />
+                <button type='primary'>Users</button>
             </div>
         );
     }
