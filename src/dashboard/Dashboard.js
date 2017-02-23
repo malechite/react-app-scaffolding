@@ -7,7 +7,7 @@ export default class App extends Component {
         return (
             <div className={styles.dashboard}>
                 Dashboard - Hello World!
-                <Button iconName='refresh' intent={Intent.PRIMARY}>Delete</Button>
+                <Button iconName='refresh' intent={Intent.WARNING}>Delete</Button>
             </div>
         );
     }
