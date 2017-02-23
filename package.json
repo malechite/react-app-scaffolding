@@ -12,11 +12,11 @@
   "author": "Brandon Dusseau",
   "license": "",
   "dependencies": {
-    "antd": "^2.6.1",
+    "@blueprintjs/core": "^1.8.0",
     "babel-plugin-import": "^1.1.0",
     "express": "^4.14.0",
-    "superagent": "^2.3.0",
-    "webpack": "^1.14.0"
+    "react-addons-css-transition-group": "^15.4.2",
+    "superagent": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
@@ -28,6 +28,7 @@
     "css-loader": "^0.25.0",
     "eslint": "^3.10.0",
     "eslint-plugin-react": "^6.6.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "isomorphic-fetch": "^2.2.1",
     "node-sass": "^3.12.2",
@@ -43,7 +44,6 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "^1.8.4",
-    "webpack-hot-middleware": "^2.13.2",
-    "extract-text-webpack-plugin": "^1.0.1"
+    "webpack-hot-middleware": "^2.13.2"
   }
 }
