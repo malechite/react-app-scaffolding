@@ -4,7 +4,7 @@ import '@blueprintjs/core/dist/blueprint.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import configureStore from './ConfigureStore';
 import DefaultLayout from '../layouts/DefaultLayout';
 import Users from '../users/Users';
@@ -14,11 +14,11 @@ const store = configureStore();
 
 render(
     <Provider store={store}>
-        <Router history={browserHistory}>
-            <Route component={DefaultLayout}>
-                <Route path='/' component={Dashboard} />
-                <Route path='/users' component={Users} />
-            </Route>
+        <Router>
+            <DefaultLayout>
+                <Route exact path='/' component={Dashboard}/>
+                <Route exact path='/users' component={Users}/>
+            </DefaultLayout>
         </Router>
     </Provider>,
     document.getElementById('root')

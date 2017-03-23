@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './Dashboard.scss';
 import { Button, Intent } from '@blueprintjs/core';
 
-export default class App extends Component {
+export default class Dashboard extends Component {
     render() {
         return (
             <div className={styles.dashboard}>
