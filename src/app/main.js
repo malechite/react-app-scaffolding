@@ -4,7 +4,7 @@ import '@blueprintjs/core/dist/blueprint.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import configureStore from './ConfigureStore';
 import DefaultLayout from '../layouts/DefaultLayout';
 import Users from '../users/Users';
