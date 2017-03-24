@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/dev-server.html'));
+    res.sendFile(path.join(__dirname + '/../src/index.html'));
 });
 
 var server = app.listen(3000, function() {
