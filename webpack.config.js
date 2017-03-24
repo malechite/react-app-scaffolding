@@ -1,13 +1,43 @@
+var webpack = require('webpack');
+var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     context: __dirname,
-    entry: [
-        './src/app/main.js'
-    ],
-    output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
-        filename: 'bundle.js'
+    entry: {
+        main: './src/main.js'
     },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        filename: '[name]-[chunkhash].js',
+        chunkFilename: '[name]-[chunkhash].js'
+    },
+    resolve: {
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules'
+        ],
+        alias: {
+            Styles: path.resolve(__dirname, 'src/styles'),
+            Utilities: path.resolve(__dirname, 'src/shared/utilities')
+        }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function(module) {
+                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'React Application',
+            filename: 'index.html'
+        })
+    ],
     module: {
         rules: [
             {
