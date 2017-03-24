@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import configureStore from 'redux/ConfigureStore';
 import DefaultLayout from 'shared/layout/DefaultLayout';
-import Users from 'pages/users/Users';
-import Dashboard from 'pages/dashboard/Dashboard';
+import Users from 'containers/Users/Users';
+import Dashboard from 'containers/Dashboard/Dashboard';
 
 const store = configureStore();
 
