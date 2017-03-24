@@ -1,11 +1,22 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
     context: __dirname,
     entry: [
-        './src/app/main.js',
+        './src/main.js',
         'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
     ],
+    resolve: {
+        modules: [
+            path.join(__dirname, 'src'),
+            'node_modules'
+        ],
+        alias: {
+            Styles: path.resolve(__dirname, 'src/styles'),
+            Utilities: path.resolve(__dirname, 'src/shared/utilities')
+        }
+    },
     output: {
         path: __dirname + '/dist',
         publicPath: '/',

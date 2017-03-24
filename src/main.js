@@ -1,14 +1,14 @@
-import './style.scss';
+import 'Styles/style.scss';
 import '@blueprintjs/core/dist/blueprint.css';
 
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import configureStore from './ConfigureStore';
-import DefaultLayout from '../shared/layout/DefaultLayout';
-import Users from '../users/Users';
-import Dashboard from '../dashboard/Dashboard';
+import configureStore from 'redux/ConfigureStore';
+import DefaultLayout from 'shared/layout/DefaultLayout';
+import Users from 'pages/users/Users';
+import Dashboard from 'pages/dashboard/Dashboard';
 
 const store = configureStore();
 
