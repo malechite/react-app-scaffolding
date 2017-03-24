@@ -34,8 +34,9 @@ module.exports = {
             name: 'manifest'
         }),
         new HtmlWebpackPlugin({
-            title: 'React Application',
-            filename: 'index.html'
+            template: path.join(__dirname, './src/index.html'),
+            filename: 'index.html',
+            inject: 'body'
         })
     ],
     module: {

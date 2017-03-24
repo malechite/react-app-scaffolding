@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -20,7 +21,8 @@ module.exports = {
     output: {
         path: __dirname + '/dist',
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: '[name]-[hash].js',
+        chunkFilename: '[name]-[chunkhash].js'
     },
     module: {
         rules: [
@@ -74,6 +76,20 @@ module.exports = {
     devtool: 'eval',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin()
+        new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: function(module) {
+                return module.context && module.context.indexOf('node_modules') !== -1;
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, './src/index.html'),
+            filename: 'index.html',
+            inject: 'body'
+        })
     ]
 };
