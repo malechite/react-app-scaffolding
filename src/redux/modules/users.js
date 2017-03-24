@@ -1,5 +1,12 @@
-import {ADD_ITEM, DELETE_ITEM, EDIT_ITEM} from '../actions/ActionTypes';
 
+//User Actions
+const ADD_ITEM = 'ADD_ITEM';
+const DELETE_ITEM = 'DELETE_ITEM';
+const EDIT_ITEM = 'EDIT_ITEM';
+const REQUEST_LIST = 'REQUEST_LIST';
+const RECEIVE_LIST = 'RECEIVE_LIST';
+
+//Initial State
 const initialState = [
     {
         text: 'Foobar',
@@ -11,7 +18,8 @@ const initialState = [
     }
 ];
 
-export default function todos(state = initialState, action) {
+//Reducer
+export default function reducer(state = initialState, action) {
     switch (action.type) {
     case ADD_ITEM:
         return [
@@ -38,4 +46,25 @@ export default function todos(state = initialState, action) {
     default:
         return state;
     }
+}
+
+//Action Creators
+export function addItem(item) {
+    return { type: ADD_ITEM, item };
+}
+
+export function deleteItem(item) {
+    return { type: DELETE_ITEM, item };
+}
+
+export function requestList() {
+    return { type: REQUEST_LIST };
+}
+
+export function receiveList(item) {
+    return { type: RECEIVE_LIST, item };
+}
+
+export function editItem(item) {
+    return { type: EDIT_ITEM, item };
 }
