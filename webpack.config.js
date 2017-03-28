@@ -5,7 +5,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     context: __dirname,
     entry: {
-        main: './src/main.js'
+        main: './src/main.js',
+        vendor: ['react', 'react-dom', '@blueprintjs/core']
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -26,9 +27,7 @@ module.exports = {
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: function(module) {
-                return module.context && module.context.indexOf('node_modules') !== -1;
-            }
+            minChunks: ({ resource }) => /node_modules/.test(resource)
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest'
@@ -37,6 +36,23 @@ module.exports = {
             template: path.join(__dirname, './src/index.html'),
             filename: 'index.html',
             inject: 'body'
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true
+            },
+            output: {
+                comments: false
+            }
         })
     ],
     module: {
@@ -45,10 +61,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    query: {
-                        presets: ['react', 'react-hmre', 'es2015']
-                    }
+                    loader: 'babel-loader'
                 }
             },
             {

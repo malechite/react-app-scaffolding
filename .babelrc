@@ -1,0 +1,8 @@
+{
+    "presets": ["es2015", "react", "react-hmre", "stage-3"],
+    "plugins": [
+        "syntax-dynamic-import",
+        "transform-runtime",
+        "transform-class-properties"
+    ]
+}

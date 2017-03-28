@@ -30,10 +30,7 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['react', 'react-hmre', 'es2015']
-                    }
+                    loader: 'babel-loader'
                 }
             },
             {
@@ -79,9 +76,7 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            minChunks: function(module) {
-                return module.context && module.context.indexOf('node_modules') !== -1;
-            }
+            minChunks: ({ resource }) => /node_modules/.test(resource)
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'manifest'

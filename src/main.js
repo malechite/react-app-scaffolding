@@ -6,9 +6,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import createStore from 'redux/create';
+import asyncComponent from 'shared/utilities/asyncComponent';
+
 import DefaultLayout from 'shared/layout/DefaultLayout';
-import Users from 'containers/Users/Users';
-import Dashboard from 'containers/Dashboard/Dashboard';
+
+const Users = asyncComponent(() => System.import('containers/Users/Users').then(module => module.default));
+const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashboard').then(module => module.default));
 
 const store = createStore();
 
