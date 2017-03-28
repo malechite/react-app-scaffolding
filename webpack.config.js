@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -25,6 +26,7 @@ module.exports = {
         }
     },
     plugins: [
+        new CleanWebpackPlugin(['dist']),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: ({ resource }) => /node_modules/.test(resource)
