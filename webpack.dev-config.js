@@ -3,10 +3,12 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    context: __dirname,
+    context: path.resolve(__dirname, 'src'),
     entry: [
-        './src/main.js',
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true'
+        'react-hot-loader/patch',
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        './main.js'
     ],
     resolve: {
         modules: [
@@ -19,10 +21,17 @@ module.exports = {
         }
     },
     output: {
-        path: __dirname + '/dist',
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[chunkhash].js'
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+        hot: true,
+        contentBase: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        historyApiFallback: true
     },
     module: {
         rules: [
@@ -70,9 +79,9 @@ module.exports = {
             }
         ]
     },
-    devtool: 'eval',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',

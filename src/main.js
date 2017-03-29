@@ -20,7 +20,7 @@ render(
         <Router>
             <DefaultLayout>
                 <Route exact path='/' component={Dashboard}/>
-                <Route exact path='/users' component={Users}/>
+                <Route exact path='/users' component={Users} />
             </DefaultLayout>
         </Router>
     </Provider>,

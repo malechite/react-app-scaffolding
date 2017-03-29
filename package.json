@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development node bin/dev-server.js",
+    "start": "NODE_ENV=development webpack-dev-server --config=webpack.dev-config.js",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +20,9 @@
     "babel-preset-stage-3": "^6.22.0",
     "clean-webpack-plugin": "^0.1.16",
     "html-webpack-plugin": "^2.28.0",
-    "react-router-dom": "^4.0.0"
+    "react-hot-loader": "3.0.0-beta.6",
+    "react-router-dom": "^4.0.0",
+    "webpack-dev-server": "^2.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
