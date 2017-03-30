@@ -4,16 +4,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    context: __dirname,
+    context: path.resolve(__dirname, 'src'),
     entry: {
-        main: './src/main.js',
-        vendor: ['react', 'react-dom', '@blueprintjs/core']
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
-        filename: '[name]-[chunkhash].js',
-        chunkFilename: '[name]-[chunkhash].js'
+        vendor: ['react', 'react-dom', '@blueprintjs/core'],
+        main: './main.js'
     },
     resolve: {
         modules: [
@@ -22,46 +16,17 @@ module.exports = {
         ],
         alias: {
             Styles: path.resolve(__dirname, 'src/styles'),
-            Utilities: path.resolve(__dirname, 'src/shared/utilities')
+            Utilities: path.resolve(__dirname, 'src/shared/utilities'),
+            Static: path.resolve(__dirname, 'static')
         }
     },
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: ({ resource }) => /node_modules/.test(resource)
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        }),
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, './src/index.html'),
-            filename: 'index.html',
-            inject: 'body'
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-                conditionals: true,
-                unused: true,
-                comparisons: true,
-                sequences: true,
-                dead_code: true,
-                evaluate: true,
-                if_return: true,
-                join_vars: true
-            },
-            output: {
-                comments: false
-            }
-        })
-    ],
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/',
+        filename: '[name]-[chunkhash].js',
+        chunkFilename: '[name]-[chunkhash].js'
+    },
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -108,5 +73,41 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map'
+    plugins: [
+        new CleanWebpackPlugin(['dist']),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: ({ resource }) => /node_modules/.test(resource)
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest'
+        }),
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, './src/index.html'),
+            filename: 'index.html',
+            inject: 'body'
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+                screw_ie8: true,
+                conditionals: true,
+                unused: true,
+                comparisons: true,
+                sequences: true,
+                dead_code: true,
+                evaluate: true,
+                if_return: true,
+                join_vars: true
+            },
+            output: {
+                comments: false
+            }
+        })
+    ]
 };

@@ -7,12 +7,16 @@
     "start": "NODE_ENV=development webpack-dev-server --config=webpack.dev-config.js",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack",
+    "dev": "yarn build && NODE_ENV=development node bin/deploy.js",
+    "prod": "yarn build && NODE_ENV=production node bin/deploy.js",
+    "qa": "yarn build && NODE_ENV=staging node bin/deploy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brandon Dusseau",
   "license": "",
   "dependencies": {
     "@blueprintjs/core": "^1.8.0",
+    "aws-sdk": "^2.34.0",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -22,6 +26,7 @@
     "html-webpack-plugin": "^2.28.0",
     "react-hot-loader": "3.0.0-beta.6",
     "react-router-dom": "^4.0.0",
+    "s3": "^4.4.0",
     "webpack-dev-server": "^2.4.2"
   },
   "devDependencies": {

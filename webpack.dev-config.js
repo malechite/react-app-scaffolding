@@ -17,7 +17,8 @@ module.exports = {
         ],
         alias: {
             Styles: path.resolve(__dirname, 'src/styles'),
-            Utilities: path.resolve(__dirname, 'src/shared/utilities')
+            Utilities: path.resolve(__dirname, 'src/shared/utilities'),
+            Static: path.resolve(__dirname, 'static')
         }
     },
     output: {
