@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import LargeSpinner from 'shared/loading/LargeSpinner';
 
 export default function asyncComponent(getComponent) {
     return class AsyncComponent extends Component {
