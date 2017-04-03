@@ -9,6 +9,9 @@ var config = {
             staging: 'staging.example.com',
             rootFilePath: '/'
         }
+    },
+    api: {
+        base_url: 'http://localhost:3001/'
     }
 };
 

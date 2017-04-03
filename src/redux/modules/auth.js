@@ -1,4 +1,6 @@
 /*eslint no-console: 0 */
+import request from 'superagent';
+import config from 'config';
 
 //User Actions
 const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -9,20 +11,33 @@ const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 //Initial State
 const initialState = {
+    isFetching: false,
     isAuthenticated: localStorage.getItem('id_token') ? true : false
 };
 
 //Reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-    // case ADD_ITEM:
-    //
-    // case DELETE_ITEM:
-    //
-    // case EDIT_ITEM:
-    //
-    default:
-        return state;
+        case LOGIN_REQUEST:
+            return Object.assign({}, state, {
+                isFetching: true,
+                isAuthenticated: false,
+                user: action.creds
+            });
+        case LOGIN_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                isAuthenticated: true,
+                errorMessage: ''
+            });
+        case LOGIN_FAILURE:
+            return Object.assign({}, state, {
+                isFetching: false,
+                isAuthenticated: false,
+                errorMessage: action.message
+            });
+        default:
+            return state;
     }
 }
 
@@ -54,7 +69,7 @@ export function loginError(message) {
     };
 }
 
-function requestLogout() {
+export function requestLogout() {
     return {
         type: LOGOUT_REQUEST,
         isFetching: true,
@@ -62,7 +77,7 @@ function requestLogout() {
     };
 }
 
-function receiveLogout() {
+export function receiveLogout() {
     return {
         type: LOGOUT_SUCCESS,
         isFetching: false,
@@ -72,29 +87,21 @@ function receiveLogout() {
 
 //Async actions
 export function loginUser(creds) {
-    let config = {
-        method: 'POST',
-        headers: { 'Content-Type':'application/x-www-form-urlencoded' },
-        body: `username=${creds.username}&password=${creds.password}`
-    };
-
-    return dispatch => {
-        // We dispatch requestLogin to kickoff the call to the API
+    console.log('loginUser', creds);
+    return (dispatch) => {
         dispatch(requestLogin(creds));
-        return fetch('http://localhost:3001/sessions/create', config)
-        .then(response =>
-        response.json().then(user => ({ user, response }))).then(({ user, response }) =>  {
-            if (!response.ok) {
-                // If there was a problem, we want to dispatch the error condition
-                dispatch(loginError(user.message));
-                return Promise.reject(user);
-            } else {
-                // If login was successful, set the token in local storage
-                localStorage.setItem('id_token', user.id_token);
-                // Dispatch the success action
-                dispatch(receiveLogin(user));
-            }
-        }).catch(err => console.log('Error: ', err));
+        return request.post(config.api.base_url + 'sessions/create')
+            .send(creds)
+            .end((err, res) => {
+                //dispatch(setLoading(false));
+                if (err) {
+                    dispatch(loginError(res.message));
+                } else {
+                    dispatch(receiveLogin(res));
+                    console.log(res);
+                    localStorage.setItem('id_token', res.body.id_token);
+                }
+            });
     };
 }
 

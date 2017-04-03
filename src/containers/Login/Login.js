@@ -1,13 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Button, Intent } from '@blueprintjs/core';
+import { loginUser } from 'redux/modules/auth';
 
-export default class Login extends Component {
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        };
+    }
+
+    handleUpdate(e) {
+        let name = e.target.name;
+        let val = e.target.value;
+        this.setState({[name]: val});
+    }
+
+    handleLogin(e) {
+        e.preventDefault();
+        if (this.state.username && this.state.password) {
+            this.props.loginUser({
+                username: this.state.username,
+                password: this.state.password
+            });
+        }
+    }
+
     render() {
         return (
             <div>
-                <div>
-                    Login
-                </div>
+                Username: <input type='text' name='username' onChange={this.handleUpdate.bind(this)} />
+                Password: <input type='password' name='password' onChange={this.handleUpdate.bind(this)} />
+                <Button iconName='user' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
             </div>
         );
     }
 }
+
+Login.propTypes = {
+    loginUser: PropTypes.func.isRequired
+};
+
+export default connect(null, {loginUser})(Login);

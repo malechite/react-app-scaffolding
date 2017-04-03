@@ -14,7 +14,7 @@ const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashb
 class Routes extends Component {
 
     authenticatedRoutes() {
-        const { isAuthenticated } = this.props;
+        const { dispatch, isAuthenticated } = this.props;
         if (isAuthenticated) {
             return (
                 <DefaultLayout>
@@ -26,7 +26,7 @@ class Routes extends Component {
         } else {
             return (
                 <LoginLayout>
-                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/login' render={() => <Login dispatch={dispatch} />}/>
                     <Route path='*'>
                         <Redirect to='/login' />
                     </Route>

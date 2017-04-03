@@ -17,7 +17,9 @@ module.exports = {
         alias: {
             Styles: path.resolve(__dirname, 'src/styles'),
             Utilities: path.resolve(__dirname, 'src/shared/utilities'),
-            Static: path.resolve(__dirname, 'static')
+            Static: path.resolve(__dirname, 'static'),
+            Redux: path.resolve(__dirname, 'src/redux'),
+            config$: path.resolve(__dirname, 'config.js')
         }
     },
     output: {
