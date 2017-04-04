@@ -5,7 +5,7 @@ function callApi(type, endpoint, options) {
 
     let token = localStorage.getItem('id_token') || null;
 
-    return request(type, api.base_url + endpoint)
+    return request(type, api.base_url + api.route + endpoint)
         .set({ 'Authorization': 'Bearer ' + token })
         .send(options)
         .then(res => {

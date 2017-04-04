@@ -11,7 +11,8 @@ var config = {
         }
     },
     api: {
-        base_url: 'http://localhost:3001/'
+        base_url: 'http://localhost:3001/',
+        route: 'api/'
     }
 };
 
