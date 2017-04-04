@@ -87,7 +87,6 @@ export function receiveLogout() {
 
 //Async actions
 export function loginUser(creds) {
-    console.log('loginUser', creds);
     return (dispatch) => {
         dispatch(requestLogin(creds));
         return request.post(config.api.base_url + 'sessions/create')
@@ -98,7 +97,6 @@ export function loginUser(creds) {
                     dispatch(loginError(res.message));
                 } else {
                     dispatch(receiveLogin(res));
-                    console.log(res);
                     localStorage.setItem('id_token', res.body.id_token);
                 }
             });
