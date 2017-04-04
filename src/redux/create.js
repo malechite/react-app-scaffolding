@@ -4,7 +4,7 @@ import api from './middleware/api';
 
 export default function createStore(initialState) {
     const func = (window.devToolsExtension ? window.devToolsExtension()(_createStore) : _createStore);
-    const create = compose(applyMiddleware(thunk))(func);
+    const create = compose(applyMiddleware(thunk, api))(func);
 
     const reducer = require('./modules/reducer').default;
     const store = create(reducer);
