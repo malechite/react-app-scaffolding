@@ -2,8 +2,7 @@ import { api } from 'config';
 import request from 'superagent';
 
 function callApi(type, endpoint, options) {
-
-    let token = localStorage.getItem('id_token') || null;
+    let token = localStorage.getItem('jwt') || null;
 
     return request(type, api.base_url + api.route + endpoint)
         .set({ 'Authorization': 'Bearer ' + token })
@@ -19,7 +18,6 @@ function callApi(type, endpoint, options) {
 export const CALL_API = Symbol('Call API');
 
 export default store => next => action => {
-
     const callAPI = action[CALL_API];
 
     // So the middleware doesn't get applied to every single action
@@ -31,14 +29,26 @@ export default store => next => action => {
     const [ successAction, errorAction ] = actions;
 
     return callApi(type, endpoint, options).then(
-        response =>
-        next({
-            response,
-            type: successAction
-        }),
-        error => next({
-            error: error.message || 'There was an error.',
-            type: errorAction
-        })
+        response => {
+            next({
+                response,
+                type: successAction
+            });
+        },
+        error => {
+            if (error.status) {
+                localStorage.removeItem('jwt');
+                next({
+                    type: 'LOGOUT_SUCCESS',
+                    isFetching: false,
+                    isAuthenticated: false
+                });
+            } else {
+                next({
+                    error: error.message || 'There was an error.',
+                    type: errorAction
+                });
+            }
+        }
     );
 };

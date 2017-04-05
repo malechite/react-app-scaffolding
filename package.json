@@ -15,7 +15,8 @@
   "author": "Brandon Dusseau",
   "license": "",
   "dependencies": {
-    "@blueprintjs/core": "^1.8.0",
+    "@blueprintjs/core": "^1.13.0",
+    "bourbon": "^4.3.4",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",

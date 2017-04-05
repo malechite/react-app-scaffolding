@@ -12,7 +12,7 @@ const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 //Initial State
 const initialState = {
     isFetching: false,
-    isAuthenticated: localStorage.getItem('id_token') ? true : false
+    isAuthenticated: localStorage.getItem('jwt') ? true : false
 };
 
 //Reducer
@@ -35,6 +35,11 @@ export default function reducer(state = initialState, action) {
                 isFetching: false,
                 isAuthenticated: false,
                 errorMessage: action.message
+            });
+        case LOGOUT_SUCCESS:
+            return Object.assign({}, state, {
+                isFetching: false,
+                isAuthenticated: false
             });
         default:
             return state;
@@ -97,7 +102,7 @@ export function loginUser(creds) {
                     dispatch(loginError(res.message));
                 } else {
                     dispatch(receiveLogin(res));
-                    localStorage.setItem('id_token', res.body.id_token);
+                    localStorage.setItem('jwt', res.body.id_token);
                 }
             });
     };
@@ -106,7 +111,7 @@ export function loginUser(creds) {
 export function logoutUser() {
     return dispatch => {
         dispatch(requestLogout());
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('jwt');
         dispatch(receiveLogout());
     };
 }
