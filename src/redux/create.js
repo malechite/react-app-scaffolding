@@ -12,7 +12,7 @@ export default function createStore(initialState) {
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
         module.hot.accept('./modules/reducer', () => {
-            store.replaceReducer(require('./modules/reducer'));
+            store.replaceReducer(require('./modules/reducer').default);
         });
     }
 

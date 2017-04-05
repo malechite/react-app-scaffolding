@@ -36,10 +36,10 @@ export default store => next => action => {
             });
         },
         error => {
-            if (error.status) {
+            if (error.status === 401) {
                 localStorage.removeItem('jwt');
                 next({
-                    type: 'LOGOUT_SUCCESS',
+                    type: 'application/auth/LOGOUT_SUCCESS',
                     isFetching: false,
                     isAuthenticated: false
                 });

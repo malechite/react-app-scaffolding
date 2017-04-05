@@ -1,70 +1,76 @@
+import { CALL_API } from 'redux/middleware/api';
 
 //User Actions
-const ADD_ITEM = 'ADD_ITEM';
-const DELETE_ITEM = 'DELETE_ITEM';
-const EDIT_ITEM = 'EDIT_ITEM';
-const REQUEST_LIST = 'REQUEST_LIST';
-const RECEIVE_LIST = 'RECEIVE_LIST';
+const ADD = 'application/users/ADD';
+const DELETE = 'application/users/application/users/DELETE';
+const EDIT = 'application/users/EDIT';
+const SEARCH_REQUEST = 'application/users/SEARCH_REQUEST';
+const SEARCH_RECEIVE = 'application/users/SEARCH_RECEIVE';
 
 //Initial State
-const initialState = [
-    {
-        text: 'Foobar',
-        id: 0
-    },
-    {
-        text:'test',
-        id:1
-    }
-];
+const initialState = {
+    loading: false,
+    users: []
+};
 
 //Reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-    case ADD_ITEM:
-        return [
-            {
-                id: state.reduce((maxId, item) => Math.max(item.id, maxId), -1) + 1,
-                completed: false,
-                text: action.text
-            },
-            ...state
-        ];
+        case SEARCH_RECEIVE:
+            return Object.assign({}, state, {
+                loading:false,
+                users: action.response.text
+            });
 
-    case DELETE_ITEM:
-        return state.filter(item =>
-            item.id !== action.id
-        );
-
-    case EDIT_ITEM:
-        return state.map(item =>
-            item.id === action.id ?
-            Object.assign({}, item, {text: action.text}) :
-            item
-        );
-
-    default:
-        return state;
+        default:
+            return state;
     }
 }
 
 //Action Creators
-export function addItem(item) {
-    return { type: ADD_ITEM, item };
+export function addUser(user) {
+    return {
+        type: ADD,
+        user
+    };
 }
 
-export function deleteItem(item) {
-    return { type: DELETE_ITEM, item };
+export function deleteUser(user) {
+    return {
+        type: DELETE,
+        user
+    };
 }
 
-export function requestList() {
-    return { type: REQUEST_LIST };
+export function editUser(user) {
+    return {
+        type: EDIT,
+        user
+    };
 }
 
-export function receiveList(item) {
-    return { type: RECEIVE_LIST, item };
+
+export function searchUsers() {
+    return {
+        type: SEARCH_REQUEST
+    };
 }
 
-export function editItem(item) {
-    return { type: EDIT_ITEM, item };
+export function receiveUsers(item) {
+    return {
+        type: SEARCH_RECEIVE,
+        item
+    };
+}
+
+//Async actions
+export function fetchQuote() {
+    return {
+        [CALL_API]: {
+            type: 'GET',
+            endpoint: 'protected/random-quote',
+            options: {},
+            actions: [SEARCH_RECEIVE, null] //success action, error action
+        }
+    };
 }

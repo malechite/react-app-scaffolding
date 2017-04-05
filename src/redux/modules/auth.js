@@ -3,15 +3,15 @@ import request from 'superagent';
 import config from 'config';
 
 //User Actions
-const LOGIN_REQUEST = 'LOGIN_REQUEST';
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const LOGIN_FAILURE = 'LOGIN_FAILURE';
-const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+const LOGIN_REQUEST = 'application/auth/LOGIN_REQUEST';
+const LOGIN_SUCCESS = 'application/auth/LOGIN_SUCCESS';
+const LOGIN_FAILURE = 'application/auth/LOGIN_FAILURE';
+const LOGOUT_REQUEST = 'application/auth/LOGOUT_REQUEST';
+const LOGOUT_SUCCESS = 'application/auth/LOGOUT_SUCCESS';
 
 //Initial State
 const initialState = {
-    isFetching: false,
+    loading: false,
     isAuthenticated: localStorage.getItem('jwt') ? true : false
 };
 
@@ -20,25 +20,25 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
             return Object.assign({}, state, {
-                isFetching: true,
+                loading: true,
                 isAuthenticated: false,
                 user: action.creds
             });
         case LOGIN_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: false,
+                loading: false,
                 isAuthenticated: true,
                 errorMessage: ''
             });
         case LOGIN_FAILURE:
             return Object.assign({}, state, {
-                isFetching: false,
+                loading: false,
                 isAuthenticated: false,
                 errorMessage: action.message
             });
         case LOGOUT_SUCCESS:
             return Object.assign({}, state, {
-                isFetching: false,
+                loading: false,
                 isAuthenticated: false
             });
         default:
@@ -50,8 +50,6 @@ export default function reducer(state = initialState, action) {
 export function requestLogin(creds) {
     return {
         type: LOGIN_REQUEST,
-        isFetching: true,
-        isAuthenticated: false,
         creds
     };
 }
@@ -59,8 +57,6 @@ export function requestLogin(creds) {
 export function receiveLogin(user) {
     return {
         type: LOGIN_SUCCESS,
-        isFetching: false,
-        isAuthenticated: true,
         id_token: user.id_token
     };
 }
@@ -68,25 +64,19 @@ export function receiveLogin(user) {
 export function loginError(message) {
     return {
         type: LOGIN_FAILURE,
-        isFetching: false,
-        isAuthenticated: false,
         message
     };
 }
 
 export function requestLogout() {
     return {
-        type: LOGOUT_REQUEST,
-        isFetching: true,
-        isAuthenticated: true
+        type: LOGOUT_REQUEST
     };
 }
 
 export function receiveLogout() {
     return {
-        type: LOGOUT_SUCCESS,
-        isFetching: false,
-        isAuthenticated: false
+        type: LOGOUT_SUCCESS
     };
 }
 
