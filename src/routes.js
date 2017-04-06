@@ -14,19 +14,17 @@ const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashb
 class Routes extends Component {
 
     authenticatedRoutes() {
-        const { dispatch, isAuthenticated } = this.props;
-        if (isAuthenticated) {
+        if (this.props.isAuthenticated) {
             return (
                 <DefaultLayout>
                     <Route exact path='/' component={Dashboard}/>
                     <Route exact path='/users' component={Users} />
-                    <Route path='*'><Redirect to='/' /></Route>
                 </DefaultLayout>
             );
         } else {
             return (
                 <LoginLayout>
-                    <Route exact path='/login' render={() => <Login dispatch={dispatch} />}/>
+                    <Route exact path='/login' render={() => <Login />}/>
                     <Route path='*'>
                         <Redirect to='/login' />
                     </Route>
@@ -45,18 +43,16 @@ class Routes extends Component {
 }
 
 Routes.propTypes = {
-    dispatch: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
 
     const { auth } = state;
-    const { isAuthenticated, errorMessage } = auth;
+    const { isAuthenticated } = auth;
 
     return {
-        isAuthenticated,
-        errorMessage
+        isAuthenticated
     };
 }
 

@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@blueprintjs/core@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-1.13.0.tgz#e4339d9e04de4afa5615207fe749a2ce0ffd1edd"
+"@blueprintjs/core@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@blueprintjs/core/-/core-1.14.0.tgz#0b18f0aa7421b64b656389ddbe45fab12d02b700"
   dependencies:
     "@types/dom4" "^1.5.20"
     "@types/tether" "^1.1.27"
@@ -2136,6 +2136,10 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+flexboxgrid@^6.3.0:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/flexboxgrid/-/flexboxgrid-6.3.1.tgz#e99898afc07b7047722bb81a958a5fba4d4e20fd"
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -3979,6 +3983,12 @@ react-dom@^15.4.2:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+react-flexbox-grid@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-flexbox-grid/-/react-flexbox-grid-1.0.2.tgz#28e33b0d346427502ba454a7be51406266d78f9f"
+  dependencies:
+    flexboxgrid "^6.3.0"
 
 react-hot-loader@3.0.0-beta.6:
   version "3.0.0-beta.6"

@@ -15,11 +15,12 @@
   "author": "Brandon Dusseau",
   "license": "",
   "dependencies": {
-    "@blueprintjs/core": "^1.13.0",
+    "@blueprintjs/core": "^1.14.0",
     "bourbon": "^4.3.4",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-flexbox-grid": "^1.0.2",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",

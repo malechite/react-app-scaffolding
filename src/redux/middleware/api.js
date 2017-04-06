@@ -30,7 +30,7 @@ export default store => next => action => {
     return callApi(type, endpoint, options).then(
         response => {
             next({
-                response,
+                response:response.body,
                 type: actions.success
             });
         },

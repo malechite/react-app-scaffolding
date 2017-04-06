@@ -1,34 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Table extends Component {
+    createColumns() {
+        return this.props.columns.map(function(item, index) {
+            return <th key={'column' + index}>{item}</th>;
+        });
+    }
+
+    createRows() {
+        return this.props.rows.map((item, index) => {
+            return (
+                <tr key={'row' + index}>
+                    {this.createCells(item)}
+                </tr>
+            );
+        });
+    }
+
+    createCells(row) {
+        return row.map(function(cell, index) {
+            return <td key={'cell' + index}>{cell}</td>;
+        });
+    }
+
     render() {
         return (
             <table className='pt-table pt-interactive'>
                 <thead>
                     <tr>
-                        <th>Project</th>
-                        <th>Description</th>
-                        <th>Technologies</th>
+                        {this.createColumns()}
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Blueprint</td>
-                        <td>CSS framework and UI toolkit</td>
-                        <td>Sass, TypeScript, React</td>
-                    </tr>
-                    <tr>
-                        <td>TSLint</td>
-                        <td>Static analysis linter for TypeScript</td>
-                        <td>TypeScript</td>
-                    </tr>
-                    <tr>
-                        <td>Plottable</td>
-                        <td>Composable charting library built on top of D3</td>
-                        <td>SVG, TypeScript, D3</td>
-                    </tr>
+                    {this.createRows()}
                 </tbody>
             </table>
         );
     }
 }
+
+
+Table.propTypes = {
+    columns: PropTypes.array.isRequired,
+    rows: PropTypes.any
+};

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import styles from './layout.scss';
 
 class Footer extends Component {
     render() {
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div className={styles.footer}>
                 ©2017
             </div>
         );

@@ -11,18 +11,21 @@ const SEARCH_FAILURE = 'application/users/SEARCH_FAILURE';
 //Initial State
 const initialState = {
     loading: false,
-    users: []
+    list: []
 };
 
 //Reducer
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        case SEARCH_REQUEST:
+            return Object.assign({}, state, {
+                loading:true
+            });
         case SEARCH_RESPONSE:
             return Object.assign({}, state, {
                 loading:false,
-                users: action.response.text
+                list: action.response.results
             });
-
         default:
             return state;
     }
@@ -50,26 +53,12 @@ export function editUser(user) {
     };
 }
 
-
-export function searchUsers() {
-    return {
-        type: SEARCH_REQUEST
-    };
-}
-
-export function receiveUsers(item) {
-    return {
-        type: SEARCH_RESPONSE,
-        item
-    };
-}
-
 //Async actions
-export function fetchQuote() {
+export function getUsers() {
     return {
         [CALL_API]: {
             type: 'GET',
-            endpoint: 'protected/random-quote',
+            endpoint: 'users',
             options: {},
             actions: {
                 request: SEARCH_REQUEST,
