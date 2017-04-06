@@ -51,16 +51,14 @@ module.exports = {
                     'style-loader',
                     'css-loader?modules&localIdentName=[path][name]---[local]---[hash:base64:5]',
                     'sass-loader'
-                ],
-                include: /flexboxgrid/
+                ]
             },
             {
                 test: /\.css$/,
                 use: [
                     'style-loader',
                     'css-loader'
-                ],
-                include: /flexboxgrid/
+                ]
             },
             {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
