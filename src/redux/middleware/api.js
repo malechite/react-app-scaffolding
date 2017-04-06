@@ -26,13 +26,12 @@ export default store => next => action => {
     }
 
     let { endpoint, type, options, actions } = callAPI;
-    const [ successAction, errorAction ] = actions;
-
+    next({ type: actions.request });
     return callApi(type, endpoint, options).then(
         response => {
             next({
                 response,
-                type: successAction
+                type: actions.success
             });
         },
         error => {
@@ -46,7 +45,7 @@ export default store => next => action => {
             } else {
                 next({
                     error: error.message || 'There was an error.',
-                    type: errorAction
+                    type: actions.failure
                 });
             }
         }
