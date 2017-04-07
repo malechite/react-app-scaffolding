@@ -1,8 +1,8 @@
 {
   "name": "react-redux-webpack-boilerplate",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --config=webpack.dev-config.js",
     "lint": "eslint src",

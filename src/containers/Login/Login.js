@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Button, Intent } from '@blueprintjs/core';
+import { Button, Intent, InputGroup } from '@blueprintjs/core';
 import { loginUser } from 'redux/modules/auth';
+import styles from './Login.scss';
 
 class Login extends Component {
     constructor(props) {
@@ -40,10 +41,25 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='login'>
-                Username: <input type='text' name='username' onChange={this.handleUpdate.bind(this)} />
-                Password: <input type='password' name='password' onChange={this.handleUpdate.bind(this)} onKeyPress={this.loginOnEnter.bind(this)} />
-                <Button iconName='user' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
+            <div className={styles.login}>
+                <InputGroup
+                    className={styles.input}
+                    type='text'
+                    name='username'
+                    placeholder='Your email address...'
+                    leftIconName='user'
+                    onChange={this.handleUpdate.bind(this)}
+                />
+                <InputGroup
+                    className={styles.input}
+                    type='password'
+                    name='password'
+                    placeholder='Enter your password...'
+                    leftIconName='lock'
+                    onChange={this.handleUpdate.bind(this)}
+                    onKeyPress={this.loginOnEnter.bind(this)}
+                />
+                <Button iconName='log-in' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
             </div>
         );
     }
