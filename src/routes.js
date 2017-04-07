@@ -15,15 +15,13 @@ class Routes extends Component {
         const { isAuthenticated } = this.props;
 
         const loggedInView = () => (
-            <Route>
-                <DefaultLayout>
-                    <Switch>
-                        <Route exact path='/' component={Dashboard}/>
-                        <Route exact path='/users' component={Users} />
-                        <Redirect from='*' to='/' />
-                    </Switch>
-                </DefaultLayout>
-            </Route>
+            <DefaultLayout>
+                <Switch>
+                    <Route exact path='/' component={Dashboard}/>
+                    <Route exact path='/users' component={Users} />
+                    <Redirect from='*' to='/' />
+                </Switch>
+            </DefaultLayout>
         );
 
         const loggedOutView = () => (
