@@ -18,8 +18,18 @@ class Login extends Component {
         this.setState({[name]: val});
     }
 
+    loginOnEnter(e) {
+        if (e.key === 'Enter') {
+            this.logIn();
+        }
+    }
+
     handleLogin(e) {
         e.preventDefault();
+        this.logIn();
+    }
+
+    logIn() {
         if (this.state.username && this.state.password) {
             this.props.loginUser({
                 username: this.state.username,
@@ -32,7 +42,7 @@ class Login extends Component {
         return (
             <div className='login'>
                 Username: <input type='text' name='username' onChange={this.handleUpdate.bind(this)} />
-                Password: <input type='password' name='password' onChange={this.handleUpdate.bind(this)} />
+                Password: <input type='password' name='password' onChange={this.handleUpdate.bind(this)} onKeyPress={this.loginOnEnter.bind(this)} />
                 <Button iconName='user' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
             </div>
         );

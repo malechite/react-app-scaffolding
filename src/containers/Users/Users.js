@@ -6,9 +6,7 @@ import { getUsers } from 'redux/modules/users';
 
 class Users extends Component {
     componentDidMount() {
-        if (this.props.list.length === 0) {
-            this.props.getUsers();
-        }
+        this.props.getUsers();
     }
 
     generateRows() {
