@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import asyncComponent from 'shared/utilities/asyncComponent';
 
-import LoginLayout from 'shared/layout/LoginLayout';
 import DefaultLayout from 'shared/layout/DefaultLayout';
 import Login from 'containers/Login/Login';
 
@@ -12,31 +11,33 @@ const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashb
 
 
 class Routes extends Component {
-
-    authenticatedRoutes() {
-        if (this.props.isAuthenticated) {
-            return (
-                <DefaultLayout>
-                    <Route exact path='/' component={Dashboard}/>
-                    <Route exact path='/users' component={Users} />
-                </DefaultLayout>
-            );
-        } else {
-            return (
-                <LoginLayout>
-                    <Route exact path='/login' render={() => <Login />}/>
-                    <Route path='*'>
-                        <Redirect to='/login' />
-                    </Route>
-                </LoginLayout>
-            );
-        }
-    }
-
     render() {
+        const { isAuthenticated } = this.props;
+
+        const loggedInView = () => (
+            <Route>
+                <DefaultLayout>
+                    <Switch>
+                        <Route exact path='/' component={Dashboard}/>
+                        <Route exact path='/users' component={Users} />
+                        <Redirect from='*' to='/' />
+                    </Switch>
+                </DefaultLayout>
+            </Route>
+        );
+
+        const loggedOutView = () => (
+            <Switch>
+                <Route exact path='/login' component={Login} />
+                <Redirect from='*' to='/login' />
+            </Switch>
+        );
+
         return (
             <Router>
-                <Route path='/' render={this.authenticatedRoutes.bind(this)}/>
+                <Route>
+                    {isAuthenticated ? loggedInView : loggedOutView}
+                </Route>
             </Router>
         );
     }

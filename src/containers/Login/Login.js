@@ -30,7 +30,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className='login'>
                 Username: <input type='text' name='username' onChange={this.handleUpdate.bind(this)} />
                 Password: <input type='password' name='password' onChange={this.handleUpdate.bind(this)} />
                 <Button iconName='user' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
