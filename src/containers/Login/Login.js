@@ -59,7 +59,14 @@ class Login extends Component {
                     onChange={this.handleUpdate.bind(this)}
                     onKeyPress={this.loginOnEnter.bind(this)}
                 />
-                <Button iconName='log-in' intent={Intent.PRIMARY} onClick={this.handleLogin.bind(this)}>Login</Button>
+                <Button
+                    iconName='log-in'
+                    intent={Intent.PRIMARY}
+                    disabled={!(this.state.password && this.state.username)}
+                    id='loginButton'
+                    onClick={this.handleLogin.bind(this)}>
+                    Login
+                </Button>
             </div>
         );
     }
