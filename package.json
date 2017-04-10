@@ -1,5 +1,5 @@
 {
-  "name": "react-redux-webpack-boilerplate",
+  "name": "react-app-scaffolding",
   "version": "0.1.0",
   "description": "",
   "main": "src/main.js",
@@ -7,9 +7,9 @@
     "start": "NODE_ENV=development webpack-dev-server --config=webpack.dev-config.js",
     "lint": "eslint src",
     "build": "NODE_ENV=production webpack",
-    "dev": "yarn build && NODE_ENV=development node bin/deploy.js",
-    "prod": "yarn build && NODE_ENV=production node bin/deploy.js",
-    "qa": "yarn build && NODE_ENV=staging node bin/deploy.js",
+    "deploy-dev": "yarn build && NODE_ENV=development node bin/deploy.js",
+    "deploy-prod": "yarn build && NODE_ENV=production node bin/deploy.js",
+    "deploy-qa": "yarn build && NODE_ENV=staging node bin/deploy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brandon Dusseau",
