@@ -1,6 +1,5 @@
 /*eslint no-console: 0 */
 import request from 'superagent';
-import config from 'config';
 
 //User Actions
 const LOGIN_REQUEST = 'application/auth/LOGIN_REQUEST';
@@ -84,7 +83,7 @@ export function receiveLogout() {
 export function loginUser(creds) {
     return (dispatch) => {
         dispatch(requestLogin(creds));
-        return request.post(config.api.base_url + 'sessions/create')
+        return request.post('http://localhost:3001/' + 'sessions/create')
             .send(creds)
             .end((err, res) => {
                 //dispatch(setLoading(false));

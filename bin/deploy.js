@@ -1,7 +1,7 @@
 /*eslint no-console: 0 */
 var s3 = require('s3');
 var AWS = require('aws-sdk');
-var config = require('../config');
+var config = require('./config');
 var path = require('path');
 
 var awsS3Client = new AWS.S3({

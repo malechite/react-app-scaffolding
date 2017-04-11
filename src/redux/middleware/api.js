@@ -1,10 +1,11 @@
-import { api } from 'config';
 import request from 'superagent';
+
+const BASE_URL = 'http://localhost:3001/api/';
 
 function callApi(type, endpoint, options) {
     let token = localStorage.getItem('jwt') || null;
 
-    return request(type, api.base_url + api.route + endpoint)
+    return request(type, BASE_URL + endpoint)
         .set({ 'Authorization': 'Bearer ' + token })
         .send(options)
         .then(res => {
