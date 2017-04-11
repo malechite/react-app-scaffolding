@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import LargeSpinner from 'shared/loading/LargeSpinner';
+import LargeSpinner from 'shared/loading/LargeSpinner';
 
 export default function asyncComponent(getComponent) {
     return class AsyncComponent extends Component {
@@ -19,7 +19,7 @@ export default function asyncComponent(getComponent) {
             if (Component) {
                 return <Component {...this.props} />;
             }
-            return null;
+            return <LargeSpinner />;
         }
     };
 }

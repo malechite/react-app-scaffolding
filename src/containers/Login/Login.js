@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Button, Intent, InputGroup } from '@blueprintjs/core';
+import { Button, Intent, InputGroup, Spinner } from '@blueprintjs/core';
 import { loginUser } from 'redux/modules/auth';
 import styles from './Login.scss';
 
@@ -40,6 +40,8 @@ class Login extends Component {
     }
 
     render() {
+        const { loading } = this.props;
+
         return (
             <div className={styles.login}>
                 <InputGroup
@@ -59,10 +61,11 @@ class Login extends Component {
                     onChange={this.handleUpdate.bind(this)}
                     onKeyPress={this.loginOnEnter.bind(this)}
                 />
+                {loading && <Spinner className='pt-small' />}
                 <Button
                     iconName='log-in'
                     intent={Intent.PRIMARY}
-                    disabled={!(this.state.password && this.state.username)}
+                    disabled={!(this.state.password && this.state.username) || loading}
                     id='loginButton'
                     onClick={this.handleLogin.bind(this)}>
                     Login
@@ -73,7 +76,18 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-    loginUser: PropTypes.func.isRequired
+    loginUser: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
-export default connect(null, {loginUser})(Login);
+function mapStateToProps(state) {
+
+    const { auth } = state;
+    const {  loading } = auth;
+
+    return {
+        loading
+    };
+}
+
+export default connect(mapStateToProps, {loginUser})(Login);
