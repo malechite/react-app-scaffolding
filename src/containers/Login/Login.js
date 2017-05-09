@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Intent, InputGroup, Spinner } from '@blueprintjs/core';
 import { loginUser } from 'redux/modules/auth';
