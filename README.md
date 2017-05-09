@@ -1,3 +1,7 @@
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+
 # react-app-scaffolding
 
 This scaffolding is to help lay the foundatation for large scalable front end applications, using:
@@ -32,7 +36,7 @@ To build react-app-scaffolding run `yarn build` - This will empty the `/dist` fo
 
 You can deploy to S3 from the command line:
 
-1. Copy `bin/config.example.js` to `bin/config.js` 
+1. Copy `bin/config.example.js` to `bin/config.js`
 2. Update the `bin/config.js` file with your AWS credentials. (AWS credentials are used to deploy to S3 only, and aren't required for development)
 
 - `yarn deploy-dev` deploys to the bucket set for `development`
@@ -49,3 +53,11 @@ react-app-scaffolding uses the following libraries and dependencies:
 - [Redux](http://redux.js.org/)
 - [Webpack 2](https://webpack.js.org/configuration/)
 
+[npm]: https://img.shields.io/npm/v/style-loader.svg
+[npm-url]: https://npmjs.com/package/style-loader
+
+[node]: https://img.shields.io/node/v/style-loader.svg
+[node-url]: https://nodejs.org
+
+[deps]: https://david-dm.org/webpack/style-loader.svg
+[deps-url]: https://david-dm.org/webpack/file-loader
