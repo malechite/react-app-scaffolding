@@ -18,28 +18,28 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading: true,
                 isAuthenticated: false,
                 user: action.creds
-            });
+            };
         case LOGIN_SUCCESS:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading: false,
                 isAuthenticated: true,
                 errorMessage: ''
-            });
+            };
         case LOGIN_FAILURE:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading: false,
                 isAuthenticated: false,
                 errorMessage: action.message
-            });
+            };
         case LOGOUT_SUCCESS:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading: false,
                 isAuthenticated: false
-            });
+            };
         default:
             return state;
     }
@@ -81,9 +81,10 @@ export function receiveLogout() {
 
 //Async actions
 export function loginUser(creds) {
-    return (dispatch) => {
+    return dispatch => {
         dispatch(requestLogin(creds));
-        return request.post('http://localhost:3001/' + 'sessions/create')
+        return request
+            .post('http://localhost:3001/' + 'sessions/create')
             .send(creds)
             .end((err, res) => {
                 //dispatch(setLoading(false));
