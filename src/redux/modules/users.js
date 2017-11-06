@@ -18,14 +18,14 @@ const initialState = {
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SEARCH_REQUEST:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading:true
-            });
+            };
         case SEARCH_RESPONSE:
-            return Object.assign({}, state, {
+            return { ...state,
                 loading:false,
                 list: action.response.results
-            });
+            };
         default:
             return state;
     }
