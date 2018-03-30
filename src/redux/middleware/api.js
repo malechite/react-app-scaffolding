@@ -2,7 +2,7 @@ import request from 'superagent';
 
 const BASE_URL = 'http://localhost:3001/api/';
 
-function callApi(type, endpoint, options) {
+const callApi = (type, endpoint, options) => {
     let token = localStorage.getItem('jwt') || null;
 
     return request(type, BASE_URL + endpoint)
@@ -14,7 +14,7 @@ function callApi(type, endpoint, options) {
             }
             return res;
         });
-}
+};
 
 export const CALL_API = Symbol('Call API');
 

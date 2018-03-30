@@ -6,13 +6,14 @@ import { loginUser } from 'redux/modules/auth';
 import styles from './Login.scss';
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            password: ''
-        };
+    static propTypes = {
+        loginUser: PropTypes.func.isRequired,
+        loading: PropTypes.bool.isRequired
     }
+    state = {
+        username: '',
+        password: ''
+    };
 
     handleUpdate(e) {
         let name = e.target.name;
@@ -32,17 +33,20 @@ class Login extends Component {
     }
 
     logIn() {
-        if (this.state.username && this.state.password) {
-            this.props.loginUser({
-                username: this.state.username,
-                password: this.state.password
-            });
-        }
+        const { username, password } = this.state;
+        const { loginUser } = this.props;
+
+        username && password
+        ? loginUser({
+            username,
+            password
+        })
+        : null;
     }
 
     render() {
+        const { username, password } = this.state;
         const { loading } = this.props;
-
         return (
             <div className={styles.login}>
                 <InputGroup
@@ -66,7 +70,7 @@ class Login extends Component {
                 <Button
                     iconName='log-in'
                     intent={Intent.PRIMARY}
-                    disabled={!(this.state.password && this.state.username) || loading}
+                    disabled={!(username && password) || loading}
                     id='loginButton'
                     onClick={this.handleLogin.bind(this)}>
                     Login
@@ -76,19 +80,10 @@ class Login extends Component {
     }
 }
 
-Login.propTypes = {
-    loginUser: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired
-};
-
-function mapStateToProps(state) {
-
-    const { auth } = state;
-    const {  loading } = auth;
-
+const mapStateToProps = ({ auth: { loading } }) => {
     return {
         loading
     };
-}
+};
 
-export default connect(mapStateToProps, {loginUser})(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

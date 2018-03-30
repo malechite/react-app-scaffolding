@@ -12,6 +12,9 @@ const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashb
 
 
 class Routes extends Component {
+    static propTypes = {
+        isAuthenticated: PropTypes.bool.isRequired
+    };
     render() {
         const { isAuthenticated } = this.props;
 
@@ -35,25 +38,17 @@ class Routes extends Component {
         return (
             <Router>
                 <Route>
-                    {isAuthenticated ? loggedInView : loggedOutView}
+                    {!isAuthenticated ? loggedInView : loggedOutView}
                 </Route>
             </Router>
         );
     }
 }
 
-Routes.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired
-};
-
-function mapStateToProps(state) {
-
-    const { auth } = state;
-    const { isAuthenticated } = auth;
-
+const mapStateToProps = ({ auth: { isAuthenticated }}) => {
     return {
         isAuthenticated
     };
-}
+};
 
 export default connect(mapStateToProps)(Routes);

@@ -6,6 +6,11 @@ import LargeSpinner from 'shared/loading/LargeSpinner';
 import { getUsers } from 'redux/modules/users';
 
 class Users extends Component {
+    static propTypes = {
+        getUsers: PropTypes.func.isRequired,
+        list: PropTypes.array,
+        loading: PropTypes.bool.isRequired
+    }
     componentDidMount() {
         this.props.getUsers();
     }
@@ -29,21 +34,11 @@ class Users extends Component {
     }
 }
 
-Users.propTypes = {
-    getUsers: PropTypes.func.isRequired,
-    list: PropTypes.array,
-    loading: PropTypes.bool.isRequired
-};
-
-function mapStateToProps(state) {
-
-    const { users } = state;
-    const { list, loading } = users;
-
+const mapStateToProps = ({ users: { list, loading }}) => {
     return {
         list,
         loading
     };
-}
+};
 
 export default connect(mapStateToProps, {getUsers})(Users);

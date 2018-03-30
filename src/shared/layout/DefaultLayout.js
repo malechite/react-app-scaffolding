@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from './Header';
 import Footer from './Footer';
 
-export default class DefaultLayout extends Component {
-    render() {
-        return (
-            <div className='layout'>
-                <Header />
-                <div>
-                    {this.props.children}
-                </div>
-                <Footer />
+const DefaultLayout = (props) => {
+    const { children } = props;
+    return (
+        <div>
+            <Header />
+            <div>
+                {children}
             </div>
-        );
-    }
-}
+            <Footer>©2018</Footer>
+        </div>
+    );
+};
 
 DefaultLayout.propTypes = {
     children: PropTypes.any
 };
+
+export default DefaultLayout;
