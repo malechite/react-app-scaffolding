@@ -15,72 +15,82 @@ const initialState = {
 };
 
 //Reducer
-export default function reducer(state = initialState, action) {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOGIN_REQUEST:
-            return { ...state,
+        case LOGIN_REQUEST: {
+            return {
+                ...state,
                 loading: true,
                 isAuthenticated: false,
                 user: action.creds
             };
-        case LOGIN_SUCCESS:
-            return { ...state,
+        }
+        case LOGIN_SUCCESS: {
+            return {
+                ...state,
                 loading: false,
                 isAuthenticated: true,
                 errorMessage: ''
             };
-        case LOGIN_FAILURE:
-            return { ...state,
+        }
+        case LOGIN_FAILURE: {
+            return {
+                ...state,
                 loading: false,
                 isAuthenticated: false,
                 errorMessage: action.message
             };
-        case LOGOUT_SUCCESS:
-            return { ...state,
+        }
+        case LOGOUT_SUCCESS: {
+            return {
+                ...state,
                 loading: false,
                 isAuthenticated: false
             };
+        }
         default:
             return state;
     }
-}
+};
+
+export default reducer;
 
 //Action Creators
-export function requestLogin(creds) {
+export const requestLogin = (creds) => {
     return {
         type: LOGIN_REQUEST,
         creds
     };
-}
+};
 
-export function receiveLogin(user) {
+export const receiveLogin = ({ id_token}) => {
     return {
         type: LOGIN_SUCCESS,
-        id_token: user.id_token
+        id_token: id_token
     };
-}
+};
 
-export function loginError(message) {
+export const loginError = (message) => {
     return {
         type: LOGIN_FAILURE,
         message
     };
-}
+};
 
-export function requestLogout() {
+export const requestLogout = () => {
     return {
         type: LOGOUT_REQUEST
     };
-}
+};
 
-export function receiveLogout() {
+export const receiveLogout = () => {
     return {
         type: LOGOUT_SUCCESS
     };
-}
+};
 
 //Async actions
-export function loginUser(creds) {
+export const loginUser = (creds) => {
     return dispatch => {
         dispatch(requestLogin(creds));
         return request
@@ -96,12 +106,12 @@ export function loginUser(creds) {
                 }
             });
     };
-}
+};
 
-export function logoutUser() {
+export const logoutUser = () => {
     return dispatch => {
         dispatch(requestLogout());
         localStorage.removeItem('jwt');
         dispatch(receiveLogout());
     };
-}
+};

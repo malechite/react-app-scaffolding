@@ -15,46 +15,52 @@ const initialState = {
 };
 
 //Reducer
-export default function reducer(state = initialState, action) {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEARCH_REQUEST:
-            return { ...state,
+        case SEARCH_REQUEST: {
+            return {
+                ...state,
                 loading:true
             };
-        case SEARCH_RESPONSE:
-            return { ...state,
+        }
+        case SEARCH_RESPONSE: {
+            return {
+                ...state,
                 loading:false,
                 list: action.response.results
             };
+        }
         default:
             return state;
     }
-}
+};
+
+export default reducer;
 
 //Action Creators
-export function addUser(user) {
+export const addUser = (user) => {
     return {
         type: ADD,
         user
     };
-}
+};
 
-export function deleteUser(user) {
+export const deleteUser = (user) => {
     return {
         type: DELETE,
         user
     };
-}
+};
 
-export function editUser(user) {
+export const editUser = (user) => {
     return {
         type: EDIT,
         user
     };
-}
+};
 
 //Async actions
-export function getUsers() {
+export const getUsers = () => {
     return {
         [CALL_API]: {
             type: 'GET',
@@ -67,4 +73,4 @@ export function getUsers() {
             }
         }
     };
-}
+};

@@ -2,7 +2,7 @@ import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import api from './middleware/api';
 
-export default function createStore(initialState) {
+const createStore = (initialState) => {
     const func = (window.devToolsExtension ? window.devToolsExtension()(_createStore) : _createStore);
     const create = compose(applyMiddleware(thunk, api))(func);
 
@@ -17,4 +17,6 @@ export default function createStore(initialState) {
     }
 
     return store;
-}
+};
+
+export default createStore;

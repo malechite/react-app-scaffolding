@@ -6,17 +6,19 @@ import { logoutUser } from 'redux/modules/auth';
 import { Menu, MenuItem, MenuDivider, Popover, PopoverInteractionKind, Position } from '@blueprintjs/core';
 
 class Header extends Component {
-
+    static propTypes = {
+        title: PropTypes.string,
+        logoutUser: PropTypes.func.isRequired
+    }
     render() {
+        const { title = 'React Application', logoutUser } = this.props;
         let settingsMenu = (
             <Menu>
                 <MenuItem text='Settings...' iconName='cog' />
                 <MenuDivider />
-                <MenuItem onClick={this.props.logoutUser} text='Log Out' iconName='logout' />
+                <MenuItem onClick={logoutUser} text='Log Out' iconName='logout' />
             </Menu>
         );
-
-        let title = this.props.title || 'React Application';
 
         return (
             <nav className=' pt-navbar pt-dark'>
@@ -43,9 +45,4 @@ class Header extends Component {
     }
 }
 
-Header.propTypes = {
-    title: PropTypes.string,
-    logoutUser: PropTypes.func.isRequired
-};
-
-export default connect(null, {logoutUser})(Header);
+export default connect(null, { logoutUser })(Header);
