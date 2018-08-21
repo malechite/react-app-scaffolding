@@ -11,11 +11,11 @@ const Placement = styled.div`
 `;
 
 export default class LargeSpinner extends Component {
-    render() {
-        return (
-            <Placement>
-                <Spinner className='pt-large' intent={Intent.PRIMARY} />
-            </Placement>
-        );
-    }
+  render() {
+    return (
+      <Placement>
+        <Spinner className="pt-large" intent={Intent.PRIMARY} />
+      </Placement>
+    );
+  }
 }

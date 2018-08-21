@@ -1,5 +1,5 @@
 import 'Styles/style.scss';
-import '@blueprintjs/core/dist/blueprint.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
 
 import React from 'react';
 import { render } from 'react-dom';

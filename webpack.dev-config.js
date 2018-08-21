@@ -3,10 +3,11 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     context: path.resolve(__dirname, 'src'),
     entry: [
         'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:8081',
+        'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
         './main.js'
     ],
@@ -28,6 +29,17 @@ module.exports = {
         publicPath: '/',
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[chunkhash].js'
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        }
     },
     devtool: 'inline-source-map',
     devServer: {
@@ -86,13 +98,6 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: ({ resource }) => /node_modules/.test(resource)
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html'),
             filename: 'index.html',

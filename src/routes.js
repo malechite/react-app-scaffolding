@@ -7,48 +7,48 @@ import asyncComponent from 'shared/utilities/asyncComponent';
 import DefaultLayout from 'shared/layout/DefaultLayout';
 import Login from 'containers/Login/Login';
 
-const Users = asyncComponent(() => System.import('containers/Users/Users').then(module => module.default));
-const Dashboard = asyncComponent(() => System.import('containers/Dashboard/Dashboard').then(module => module.default));
+const Users = asyncComponent(() => import('containers/Users/Users').then(module => module.default));
+const Dashboard = asyncComponent(() => import('containers/Dashboard/Dashboard').then(module => module.default));
 
 
 class Routes extends Component {
-    static propTypes = {
-        isAuthenticated: PropTypes.bool.isRequired
-    };
-    render() {
-        const { isAuthenticated } = this.props;
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired
+  };
+  render() {
+    const { isAuthenticated } = this.props;
 
-        const loggedInView = () => (
-            <DefaultLayout>
-                <Switch>
-                    <Route exact path='/' component={Dashboard}/>
-                    <Route exact path='/users' component={Users} />
-                    <Redirect from='*' to='/' />
-                </Switch>
-            </DefaultLayout>
-        );
+    const loggedInView = () => (
+      <DefaultLayout>
+        <Switch>
+          <Route exact path="/" component={Dashboard}/>
+          <Route exact path="/users" component={Users} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </DefaultLayout>
+    );
 
-        const loggedOutView = () => (
-            <Switch>
-                <Route exact path='/login' component={Login} />
-                <Redirect from='*' to='/login' />
-            </Switch>
-        );
+    const loggedOutView = () => (
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Redirect from="*" to="/login" />
+      </Switch>
+    );
 
-        return (
-            <Router>
-                <Route>
-                    {!isAuthenticated ? loggedInView : loggedOutView}
-                </Route>
-            </Router>
-        );
-    }
+    return (
+      <Router>
+        <Route>
+          {!isAuthenticated ? loggedInView : loggedOutView}
+        </Route>
+      </Router>
+    );
+  }
 }
 
 const mapStateToProps = ({ auth: { isAuthenticated }}) => {
-    return {
-        isAuthenticated
-    };
+  return {
+    isAuthenticated
+  };
 };
 
 export default connect(mapStateToProps)(Routes);

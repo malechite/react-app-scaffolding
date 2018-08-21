@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+    mode: 'production',
     context: path.resolve(__dirname, 'src'),
     entry: {
         vendor: ['react', 'react-dom', '@blueprintjs/core'],
@@ -27,6 +28,17 @@ module.exports = {
         publicPath: '/',
         filename: '[name]-[chunkhash].js',
         chunkFilename: '[name]-[chunkhash].js'
+    },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all'
+                }
+            }
+        }
     },
     devtool: 'source-map',
     module: {
@@ -77,13 +89,6 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: ({ resource }) => /node_modules/.test(resource)
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html'),
             filename: 'index.html',

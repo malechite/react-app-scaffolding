@@ -5,20 +5,20 @@ import Header from './Header';
 import Footer from './Footer';
 
 const DefaultLayout = (props) => {
-    const { children } = props;
-    return (
-        <div>
-            <Header />
-            <div>
-                {children}
-            </div>
-            <Footer>©2018</Footer>
-        </div>
-    );
+  const { children } = props;
+  return (
+    <div>
+      <Header />
+      <div>
+        {children}
+      </div>
+      <Footer>©2018</Footer>
+    </div>
+  );
 };
 
 DefaultLayout.propTypes = {
-    children: PropTypes.any
+  children: PropTypes.any
 };
 
 export default DefaultLayout;
