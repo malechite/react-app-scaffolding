@@ -12,7 +12,7 @@ const DefaultLayout = (props) => {
       <div>
         {children}
       </div>
-      <Footer>©2018</Footer>
+      <Footer>© {new Date().getFullYear()}</Footer>
     </div>
   );
 };

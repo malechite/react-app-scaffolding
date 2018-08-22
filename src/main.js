@@ -12,8 +12,8 @@ FocusStyleManager.onlyShowFocusOnTabs();
 const store = createStore();
 
 render(
-    <Provider store={store}>
-        <Routes />
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Routes />
+  </Provider>,
+  document.getElementById('root')
 );
