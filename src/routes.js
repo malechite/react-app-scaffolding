@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import asyncComponent from 'shared/utilities/asyncComponent';
+import Loadable from 'react-loadable';
 
 import DefaultLayout from 'shared/layout/DefaultLayout';
 import Login from 'containers/Login/Login';
+import LargeSpinner from 'shared/loading/LargeSpinner';
 
-const Users = asyncComponent(() => import('containers/Users/Users').then(module => module.default));
-const Dashboard = asyncComponent(() => import('containers/Dashboard/Dashboard').then(module => module.default));
+const Users = Loadable({
+  loader: () => import('containers/Users/Users'),
+  loading: LargeSpinner
+});
+
+const Dashboard = Loadable({
+  loader: () => import('containers/Dashboard/Dashboard'),
+  loading: LargeSpinner
+});
 
 
 class Routes extends Component {
