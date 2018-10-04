@@ -1,24 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Header from './Header';
-import Footer from './Footer';
+import Header from './Header'
+import Footer from './Footer'
 
-const DefaultLayout = (props) => {
-  const { children } = props;
+const DefaultLayout = props => {
+  const { children } = props
   return (
     <div>
       <Header />
-      <div>
-        {children}
-      </div>
+      <div>{children}</div>
       <Footer>© {new Date().getFullYear()}</Footer>
     </div>
-  );
-};
+  )
+}
 
 DefaultLayout.propTypes = {
-  children: PropTypes.any
-};
+  children: PropTypes.any,
+}
 
-export default DefaultLayout;
+export default DefaultLayout
