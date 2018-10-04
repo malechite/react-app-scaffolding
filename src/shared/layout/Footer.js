@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Footer = styled.div`
   display: flex;
@@ -8,6 +8,6 @@ const Footer = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-`
+`;
 
-export default Footer
+export default Footer;

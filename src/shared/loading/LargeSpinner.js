@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Spinner, Intent } from '@blueprintjs/core'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import { Spinner, Intent } from '@blueprintjs/core';
+import styled from 'styled-components';
 
 const Placement = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ const Placement = styled.div`
   align-items: center;
   width: auto;
   height: 100%;
-`
+`;
 
 export default class LargeSpinner extends Component {
   render() {
@@ -16,6 +16,6 @@ export default class LargeSpinner extends Component {
       <Placement>
         <Spinner className="pt-large" intent={Intent.PRIMARY} />
       </Placement>
-    )
+    );
   }
 }

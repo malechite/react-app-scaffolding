@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import styles from './Dashboard.scss'
-import { Card, Elevation } from '@blueprintjs/core'
-import { Grid, Row, Col } from 'react-flexbox-grid'
+import React, { Component } from 'react';
+import styles from './Dashboard.scss';
+import { Card, Elevation } from '@blueprintjs/core';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 export default class Dashboard extends Component {
   render() {
@@ -56,6 +56,6 @@ export default class Dashboard extends Component {
           </Row>
         </Grid>
       </div>
-    )
+    );
   }
 }

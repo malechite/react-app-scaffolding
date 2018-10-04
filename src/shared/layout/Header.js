@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logoutUser } from 'redux/modules/auth'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logoutUser } from 'redux/modules/auth';
 import {
   Menu,
   MenuItem,
@@ -13,23 +13,23 @@ import {
   Navbar,
   Alignment,
   Button,
-} from '@blueprintjs/core'
-import styles from './Header.scss'
+} from '@blueprintjs/core';
+import styles from './Header.scss';
 
 class Header extends Component {
   static propTypes = {
     title: PropTypes.string,
     logoutUser: PropTypes.func.isRequired,
-  }
+  };
   render() {
-    const { title = 'React Application', logoutUser } = this.props
+    const { title = 'React Application', logoutUser } = this.props;
     let settingsMenu = (
       <Menu>
         <MenuItem text="Settings..." icon="cog" />
         <MenuDivider />
         <MenuItem onClick={logoutUser} text="Log Out" icon="log-out" />
       </Menu>
-    )
+    );
 
     return (
       <Navbar className="bp3-dark">
@@ -56,11 +56,11 @@ class Header extends Component {
           </Popover>
         </Navbar.Group>
       </Navbar>
-    )
+    );
   }
 }
 
 export default connect(
   null,
   { logoutUser }
-)(Header)
+)(Header);

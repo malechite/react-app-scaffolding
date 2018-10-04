@@ -1,40 +1,40 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import Table from 'shared/components/Table'
-import LargeSpinner from 'shared/loading/LargeSpinner'
-import { getUsers } from 'redux/modules/users'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Table from 'shared/components/Table';
+import LargeSpinner from 'shared/loading/LargeSpinner';
+import { getUsers } from 'redux/modules/users';
 
 class Users extends Component {
   static propTypes = {
     getUsers: PropTypes.func.isRequired,
     list: PropTypes.array,
     loading: PropTypes.bool.isRequired,
-  }
+  };
   componentDidMount() {
-    this.props.getUsers()
+    this.props.getUsers();
   }
 
   generateRows() {
-    const users = this.props.list
-    let list = []
+    const users = this.props.list;
+    let list = [];
     for (var i = 0; i < users.length; i++) {
-      let user = users[i]
-      list.push([i, user.name.first, user.name.last, user.location.city])
+      let user = users[i];
+      list.push([i, user.name.first, user.name.last, user.location.city]);
     }
-    return list
+    return list;
   }
 
   render() {
     if (this.props.loading) {
-      return <LargeSpinner />
+      return <LargeSpinner />;
     } else {
       return (
         <Table
           columns={['ID', 'First Name', 'Last Name', 'City']}
           rows={this.generateRows()}
         />
-      )
+      );
     }
   }
 }
@@ -43,10 +43,10 @@ const mapStateToProps = ({ users: { list, loading } }) => {
   return {
     list,
     loading,
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,
   { getUsers }
-)(Users)
+)(Users);
